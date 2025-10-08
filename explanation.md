@@ -3,7 +3,7 @@
 This project demonstrates full Docker containerization of a **React + Node.js + MongoDB** web application.  
 It includes **multi-service orchestration**, **data persistence**, and **versioned image deployment** on DockerHub.
 
-## 🚀 Project Overview
+## Project Overview
 
 **Services:**
 - **Frontend:** React app (Node 22.19.0-slim)  
