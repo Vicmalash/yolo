@@ -19,7 +19,7 @@ Run all components as Docker containers connected via a custom bridge network wi
 - `node:22.19.0-slim` → lightweight React build stage  
 - `alpine:3.16.7` → minimal runtime for frontend  
 - `node:22.19.0-alpine` → efficient Node backend  
-- `mongo:latest` → official MongoDB database
+- `mongo:vicmalash/mongo-slim:7.0-lite-reduced size
 
 **Network & Ports**
  Service | Host Port | Container Port 
