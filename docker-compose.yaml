@@ -42,7 +42,7 @@ services:
 
   #Creates the database microservice
   app-ip-mongo:
-    image: mongo
+    image: vicmalash/mongo-slim:7.0-lite
     container_name: app-mongo
     ports:
       - "27017:27017"
