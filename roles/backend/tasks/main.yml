@@ -1,0 +1,20 @@
+---
+- name: Build backend Docker image
+  docker_image:
+    name: gallery_backend_image
+    build:
+      path: "{{ app_dir }}/backend"
+    source: build
+
+- name: Run backend container
+  docker_container:
+    name: "{{ backend_container_name }}"
+    image: gallery_backend_image
+    state: started
+    restart_policy: always
+    published_ports:
+      - "{{ backend_port }}:5000"
+    env:
+      MONGO_URL: "mongodb://{{ db_container_name }}:27017/gallery"
+    networks:
+      - name: gallery_net

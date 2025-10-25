@@ -1,0 +1,20 @@
+---
+- name: Build frontend Docker image
+  docker_image:
+    name: gallery_frontend_image
+    build:
+      path: "{{ app_dir }}/client"
+    source: build
+
+- name: Run frontend container
+  docker_container:
+    name: "{{ frontend_container_name }}"
+    image: gallery_frontend_image
+    state: started
+    restart_policy: always
+    published_ports:
+      - "{{ frontend_port }}:3000"
+    env:
+      REACT_APP_API_URL: "http://{{ backend_container_name }}:5000"
+    networks:
+      - name: gallery_net
