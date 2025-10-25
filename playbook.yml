@@ -1,24 +1,13 @@
 ---
-- name: Deploy e-commerce app 
+- name: Deploy E-commerce Application Containers
   hosts: web
   become: true
   vars_files:
     - vars/main.yml
 
-  pre_tasks:
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-      tags: always
-
   roles:
-    - role: common     
-      tags: ["common","docker"]
-    - role: repo_clone 
-      tags: ["repo"]
-    - role: database   
-      tags: ["db"]
-    - role: backend    
-      tags: ["backend"]
-    - role: frontend   
-      tags: ["frontend"]
+    - { role: common, tags: ["common", "docker"] }
+    - { role: repo_clone, tags: ["repo"] }
+    - { role: database, tags: ["database"] }
+    - { role: backend, tags: ["backend"] }
+    - { role: frontend, tags: ["frontend"] }
