@@ -17,4 +17,4 @@
     env:
       REACT_APP_API_URL: "http://{{ backend_container_name }}:5000"
     networks:
-      - name: gallery_net
+      - name: app-net

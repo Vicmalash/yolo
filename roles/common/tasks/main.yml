@@ -41,3 +41,7 @@
     name: vagrant
     groups: docker
     append: yes
+
+- name: Create a shared Docker network
+  docker_network:
+    name: app_net
