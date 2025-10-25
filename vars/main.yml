@@ -1,0 +1,13 @@
+---
+app_repo: "https://github.com/Vicmalash/yolo.git"
+app_branch: "master"
+app_dir: "/home/vagrant/yolo"
+
+db_image: "vicmalash/mongo-slim:7.0-lite"
+db_container_name: "app-mongo"
+db_port: 27017
+
+backend_container_name: "yolo-backend"
+backend_port: 5000
+frontend_container_name: "yolo-client"
+frontend_port: 3000

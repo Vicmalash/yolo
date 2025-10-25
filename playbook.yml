@@ -1,9 +1,24 @@
 ---
-- name: Ansible playbook to dockerize and run yolo e-commerce app using ansible
-  hosts: all
+- name: Deploy e-commerce app 
+  hosts: web
   become: true
-  roles: 
-    - frontend-deployment
-    - setup-mongodb   
-    - backend-deployment
-    
+  vars_files:
+    - vars/main.yml
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      tags: always
+
+  roles:
+    - role: common     
+      tags: ["common","docker"]
+    - role: repo_clone 
+      tags: ["repo"]
+    - role: database   
+      tags: ["db"]
+    - role: backend    
+      tags: ["backend"]
+    - role: frontend   
+      tags: ["frontend"]
