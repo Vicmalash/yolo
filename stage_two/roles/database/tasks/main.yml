@@ -1,4 +1,3 @@
----
 - name: Pull MongoDB image
   docker_image:
     name: "{{ db_image }}"
@@ -14,3 +13,5 @@
       - "{{ db_port }}:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - name: "{{ app_network | default('app-net') }}"

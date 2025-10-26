@@ -5,7 +5,6 @@
     build:
       path: "{{ app_dir }}/backend"
     source: build
-
 - name: Run backend container
   docker_container:
     name: "{{ backend_container_name }}"

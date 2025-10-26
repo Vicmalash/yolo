@@ -16,7 +16,7 @@
       - "{{ frontend_port }}:3000"
     env:
       REACT_APP_API_URL: "http://{{ backend_container_name }}:5000"
-      HOST: "0.0.0.0"      
     networks:
       - name: app-net
-    command: npm start
+
+   
