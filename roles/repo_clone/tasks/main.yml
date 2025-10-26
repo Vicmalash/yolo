@@ -14,3 +14,4 @@
     version: "{{ app_branch }}"
     force: yes
   become_user: vagrant
+  tags: ["repo"]

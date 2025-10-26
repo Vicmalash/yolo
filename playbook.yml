@@ -1,7 +1,8 @@
 ---
 - name: Deploy E-commerce Application Containers
-  hosts: web
+  hosts: localhost
   become: true
+  connection: local 
   vars_files:
     - vars/main.yml
 
@@ -11,3 +12,4 @@
     - { role: database, tags: ["database"] }
     - { role: backend, tags: ["backend"] }
     - { role: frontend, tags: ["frontend"] }
+    - { role: network, tags: ['network'] }
