@@ -1,0 +1,27 @@
+# Application Repository
+app_repo: "https://github.com/Vicmalash/yolo.git"
+app_branch: "master"
+app_dir: "/home/vagrant/yolo"
+
+# Database Configuration
+db_image: "mongo:7.0"
+db_container_name: "app-mongo"
+db_port: 27017
+db_volume: "/home/vagrant/mongo_data"
+
+# Backend Configuration
+backend_container_name: "yolo-backend"
+backend_port: 5000
+backend_env:
+  MONGO_URL: "mongodb://{{ db_container_name }}:{{ db_port }}/yolo"
+
+# Frontend Configuration
+frontend_container_name: "yolo-client"
+frontend_port: 3000
+frontend_env:
+  REACT_APP_API_URL: "http://{{ backend_container_name }}:{{ backend_port }}"
+  HOST: "0.0.0.0"
+
+# Network
+app_network: "app-net"
+

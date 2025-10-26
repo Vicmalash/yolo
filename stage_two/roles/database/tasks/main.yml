@@ -1,0 +1,16 @@
+---
+- name: Pull MongoDB image
+  docker_image:
+    name: "{{ db_image }}"
+    source: pull
+
+- name: Run MongoDB container
+  docker_container:
+    name: "{{ db_container_name }}"
+    image: "{{ db_image }}"
+    state: started
+    restart_policy: always
+    published_ports:
+      - "{{ db_port }}:27017"
+    volumes:
+      - mongo_data:/data/db
