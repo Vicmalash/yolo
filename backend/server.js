@@ -1,48 +1,46 @@
+// server.js
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 const cors = require('cors');
 const multer = require('multer');
 const upload = multer();
 
 const productRoute = require('./routes/api/productRoute');
 
-// Connecting to the Database
-let mongodb_url = 'mongodb://localhost/';
-let dbName = 'yolomy';
+// Initialize Express
+const app = express();
 
-// define a url to connect to the database
-const MONGODB_URI = process.env.MONGODB_URI || mongodb_url + dbName
-mongoose.connect(MONGODB_URI,{useNewUrlParser: true, useUnifiedTopology: true  } )
-let db = mongoose.connection;
-
-// Check Connection
-db.once('open', ()=>{
-    console.log('Database connected successfully')
-})
-
-// Check for DB Errors
-db.on('error', (error)=>{
-    console.log(error);
-})
-
-// Initializing express
-const app = express()
-
-// Body parser middleware
-app.use(express.json())
-
-// 
-app.use(upload.array()); 
-
-// Cors 
+// Middleware
+app.use(express.json());
+app.use(upload.array());
 app.use(cors());
 
-// Use Route
-app.use('/api/products', productRoute)
+// MongoDB connection
+const defaultMongoUrl = 'mongodb://app-mongo:27017/yolomy'; // Use Docker service name
+const MONGODB_URI = process.env.MONGODB_URI || defaultMongoUrl;
 
-// Define the PORT
-const PORT = process.env.PORT || 5000
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
-app.listen(PORT, ()=>{
-    console.log(`Server listening on port ${PORT}`)
-})
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log('Database connected successfully');
+});
+
+db.on('error', (error) => {
+  console.error('Database connection error:', error);
+});
+
+// Routes
+app.use('/api/products', productRoute);
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
